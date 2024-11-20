@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/playersdashboard.css">
+    
+</head>
+
+<body>
+     <!-- Sidebar -->
+     <div class="sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">User Dashboard</div>
+            <div class="user-info">
+                <span>Hello, John Doe</span>
+                <img src="https://via.placeholder.com/40" alt="User" />
+            </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="overview-cards">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>120</h3>
+                <p>Total Projects</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3>8</h3>
+                <p>Upcoming Tasks</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💵</div>
+                <h3>$3,500</h3>
+                <p>Account Balance</p>
+            </div>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="notifications">
+            <div class="section-header">Recent Notifications</div>
+            <div class="notification">
+                <strong>New Message</strong><br>
+                You have a new message from Sarah.
+            </div>
+            <div class="notification">
+                <strong>Account Update</strong><br>
+                Your profile information has been updated successfully.
+            </div>
+            <div class="notification">
+                <strong>New Task</strong><br>
+                A new task has been assigned to you.
+            </div>
+        </div>
+
+        <!-- Recent Activities Section -->
+        <div class="recent-activities">
+            <div class="section-header">Recent Activities</div>
+            <div class="activity">
+                <strong>Completed Task:</strong> Task 102 - Design the landing page.
+            </div>
+            <div class="activity">
+                <strong>Updated Profile:</strong> Added a new profile picture.
+            </div>
+            <div class="activity">
+                <strong>Created Project:</strong> New mobile app project created.
+            </div>
+        </div>
+
+        <!-- Recent Users Table -->
+        <h2>Recent Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                    <td>Admin</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>jane@example.com</td>
+                    <td>User</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mike Johnson</td>
+                    <td>mike@example.com</td>
+                    <td>Moderator</td>
+                    <td>Inactive</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
