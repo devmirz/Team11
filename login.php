@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php include 'connection.php';
+session_start();
+?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -104,15 +106,15 @@
                 </div>
 
                 <div> 
-                <input type="radio" name="type" id="">Club
-                <input type="radio" name="type" id="">Players
-                <input type="radio" name="type" id="type" value="admin">admin
+                <input type="radio" name="type" value="Clubs" id="type">Club
+                <input type="radio" name="type" value="Players" id="type">Players
+                <input type="radio" name="type" id="type" value="admin">admin 
               </div>
                 <div class="form-group">
                   <input type="submit" value="Log In">
                 </div>
             </form>
-            <!-- <a href="/login">Already have an account? Log in</a> -->
+            <!-- <a href="login.php">Already have an account? Log in</a> -->
         </div>
 
     </section>
@@ -140,7 +142,7 @@
         </div>
       </div>
     </div> -->
-
+ 
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
@@ -224,5 +226,47 @@
 
 </body>
 
+<?php
+// $_SESSION['email'] = 'jj';
+include 'connection.php';
+$email=$_POST['email'];
+$password=$_POST['password'];
+$user_type=$_POST['type'];
 
-</html>
+
+
+echo $password;
+echo $user_type;
+$sql="select * from login where email='$email' and password='$password' and usertype='$user_type'";
+$result=mysqli_query($con,$sql);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+$count=mysqli_num_rows($result);
+if($count==1)
+{
+   if($user_type=='admin')
+   {
+   echo("<script>window.location = 'admin.php';</script>");
+   }
+   elseif($user_type=='Players')
+   {
+   echo("<script>window.location = 'player-das.php';</script>");
+   }
+   else
+   {
+   if( $user_type=='Clubs')
+    {
+     $_SESSION['email'] = $email;
+     echo $_SESSION["email"];
+       echo("<script>window.location = 'club-dash.php';</script>");
+    }
+  }
+
+}
+else
+{
+    echo"<h1>Login Failed. invalid email or password.</h1>";
+}
+?>
+
+
+</html>     

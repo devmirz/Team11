@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ <?php include 'connection.php';
+?> 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -24,7 +25,7 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/login.css">
+  <link rel="stylesheet" href="assets/css/signup.css">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -92,27 +93,72 @@
 
     <section>
         <div class="container">
-            <h2>Log In</h2>
-            <form action="" method="POST">
+            <h2>Club Sign Up</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" required placeholder="Enter your Username">
+                    <label for="name">Club Name</label>
+                    <input type="text" id="clubname" name="clubname" required placeholder="Enter club name">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                  <label for="name">Manager Name</label>
+                  <input type="text" id="managername" name="managername" required placeholder="Enter Manager Name">
+              </div>
+
+              <div class="mt-3 form-group">
+                            <div class="form-group">
+                                <label for="image">Upload Manager Photo</label>
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    class="form-control-file" 
+                                    id="exampleFormControlFile1"
+                                    accept=".png, .jpeg"
+                                    multiple
+                                    required
+                                    >
+                            </div>
+                        </div>
+                <div class="form-group">
+                    <label for="loc">Location</label>   
+                    <input type="text" id="location" name="location" required placeholder="Enter your Location">
+                    
                 </div>
 
-                <div> 
-                <input type="radio" name="type" id="">Club
-                <input type="radio" name="type" id="">Players
-                <input type="radio" name="type" id="type" value="admin">admin
-              </div>
                 <div class="form-group">
-                  <input type="submit" value="Log In">
+                  <label for="loc">Contact Number</label>   
+                  <input type="text" id="contactnumber" name="contactnumber" required placeholder="Enter your Contact Number">
+                  
+              </div>
+
+              <div class="mt-3 form-group">
+                            <div class="form-group">
+                                <label for="image">Upload Your Logo </label>
+                                <input 
+                                    type="file" 
+                                    name="image1" 
+                                    class="form-control-file" 
+                                    id="exampleFormControlFile1"
+                                    accept=".png, .jpeg"
+                                    multiple
+                                    required
+                                    >
+                            </div>
+                        </div>
+
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required placeholder="Enter your email">
+              </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign Up">
                 </div>
             </form>
-            <!-- <a href="/login">Already have an account? Log in</a> -->
+            <a href="login.html">Already have an account? Log in</a>
         </div>
 
     </section>
@@ -224,5 +270,65 @@
 
 </body>
 
+<?php
+include 'connection.php';
+$email=$_POST['email'];
+$password=$_POST['password'];
+$clubname=$_POST['clubname'];
+$managername=$_POST['managername'];
+$location=$_POST['location'];
+$contactnumber=$_POST['contactnumber'];
+
+$sql1="insert into login(email,password,usertype) values ('$email','$password','Clubs')" ;
+$result1=mysqli_query($con,$sql1);
+
+$sql="insert into csignup(email,clubname,managername,location,contactnumber) values ('$email','$clubname','$managername','$location',$contactnumber)" ;
+$result=mysqli_query($con,$sql);
+
+if($result==TRUE)
+{
+   echo "inserted";
+        //echo("<script>window.location = 'clubdash.php';</script>");
+}
+
+    //echo"<h1><center>Login successful</center></h1>";
+else{
+    //echo"<h1>Login Failed. invalid email or password.</h1>";
+}
+//Manager Profile Picture
+
+$filename = $_FILES["image"]["name"];
+$tempname = $_FILES["image"]["tmp_name"];  
+$folder = "ManagerPhoto/".$filename;
+if (move_uploaded_file($tempname, $folder)) {
+
+  $msg = "Image uploaded successfully";
+
+}else{
+
+  $msg = "Failed to upload image";
+
+}
+
+$q=mysqli_query($con,"update csignup set managerpic = '$filename' where email='$email'");
+echo "<script>location.href = 'club-dash.php';</script>";
+
+//Club Logo Picture
+
+$filename1 = $_FILES["image1"]["name"];
+$tempname1 = $_FILES["image1"]["tmp_name"];  
+$folder1 = "ClubPic/".$filename1;
+if (move_uploaded_file($tempname1, $folder1)) {
+
+  $msg = "Image uploaded successfully";
+
+}else{
+
+  $msg = "Failed to upload image";
+
+}
+$q1=mysqli_query($con,"update csignup set clubpic ='$filename1' where email='$email'");
+echo "<script>location.href = 'clubcard.php';</script>";
+?>
 
 </html>

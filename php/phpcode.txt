@@ -1,0 +1,33 @@
+<?php
+$email=$_POST['email'];
+$password=$_POST['password'];
+$user_type=$_POST['user-type'];
+echo $email;
+$sql="select * from login where email='$email' and password='$password' and user_type='$user_type'";
+$result=mysqli_query($con,$sql);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+$count=mysqli_num_rows($result);
+if($count==1)
+{
+   if($user_type=='admin')
+   {
+   echo("<script>window.location = 'dash.php';</script>");
+   }
+   elseif($user_type=='user')
+   {
+   echo("<script>window.location = 'user-dash.php';</script>");
+   }
+   else
+   {
+   if( $user_type=='beautician')
+    {
+        echo("<script>window.location = 'beautician-dash.php';</script>");
+    }
+}
+
+   }
+    //echo"<h1><center>Login successful</center></h1>";
+else{
+    echo"<h1>Login Failed. invalid email or password.</h1>";
+}
+?>

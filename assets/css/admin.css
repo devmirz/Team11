@@ -74,7 +74,7 @@ body {
   }
   
   .card h3 {
-    font-size: 1.8em;
+    font-size: .8em !important;
     margin-bottom: 10px;
   }
   
@@ -83,3 +83,4 @@ body {
     color: #333;
   }
   
+ 

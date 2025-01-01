@@ -1,0 +1,22 @@
+$allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+$maxSize = 5 * 1024 * 1024;  // 5 MB limit
+
+// Validate manager image
+if (!in_array(mime_content_type($tempManagerPic), $allowedTypes)) {
+    echo "Manager Image must be JPG, PNG, or GIF.";
+    exit;
+}
+if ($_FILES["managerImage"]["size"] > $maxSize) {
+    echo "Manager Image is too large. Max size is 5MB.";
+    exit;
+}
+
+// Validate club logo image
+if (!in_array(mime_content_type($tempClubLogo), $allowedTypes)) {
+    echo "Club Logo must be JPG, PNG, or GIF.";
+    exit;
+}
+if ($_FILES["clubLogo"]["size"] > $maxSize) {
+    echo "Club Logo is too large. Max size is 5MB.";
+    exit;
+}

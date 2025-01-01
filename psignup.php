@@ -24,7 +24,7 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/login.css">
+  <link rel="stylesheet" href="assets/css/signup.css">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -92,27 +92,42 @@
 
     <section>
         <div class="container">
-            <h2>Log In</h2>
+            <h2>Player Sign Up</h2>
             <form action="" method="POST">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" required placeholder="Enter your Username">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
-                </div>
-
-                <div> 
-                <input type="radio" name="type" id="">Club
-                <input type="radio" name="type" id="">Players
-                <input type="radio" name="type" id="type" value="admin">admin
+                  <label for="DOB">DOB</label>
+                  <input type="date" id="dob" name="dob" required placeholder="Enter your DOB">
               </div>
                 <div class="form-group">
-                  <input type="submit" value="Log In">
+                    <label for="loc">Location</label>
+                    <input type="text" id="location" name="location" required placeholder="Enter your Location">
+                    
+                </div>
+
+                <div class="form-group">
+                  <label for="loc">Contact Number</label>   
+                  <input type="text" id="contactnumber" name="contactnumber" required placeholder="Enter your Contact Number">
+                  
+              </div>
+
+                <div class="form-group">
+                  <label for="email">email</label>
+                  <input type="email" id="email" name="email" required placeholder="Enter your email">
+              </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign Up">
                 </div>
             </form>
-            <!-- <a href="/login">Already have an account? Log in</a> -->
+            <a href="login.html">Already have an account? Log in</a>
         </div>
 
     </section>
@@ -224,5 +239,33 @@
 
 </body>
 
+<?php
+include 'connection.php';
+$email=$_POST['email'];
+$password=$_POST['password'];
+$DOB=$_POST['dob'];
+$name=$_POST['name'];
+$location=$_POST['location'];
+$contactnumber=$_POST['contactnumber'];
+
+
+
+$sql2="insert into login(email,password,usertype) values ('$email','$password','player')" ;
+$result2=mysqli_query($con,$sql2);
+
+$sql="insert into psignup(name,dob,location,contactnumber,email) values ('$name','$DOB','$location',$contactnumber,'$email')" ;
+$result=mysqli_query($con,$sql);
+
+if($result==TRUE)
+{
+   echo "inserted";
+        //echo("<script>window.location = 'clubdash.php';</script>");
+}
+
+    //echo"<h1><center>Login successful</center></h1>";
+else{
+    //echo"<h1>Login Failed. invalid email or password.</h1>";
+}
+?>
 
 </html>
